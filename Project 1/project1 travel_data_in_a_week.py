@@ -33,22 +33,21 @@ distance=bicy_dist+walk['DISTANCE']#total distance each day
 
 plt.style.use('ggplot')
 #plot daily travel distance
-def pDaily_Travel_Distance():
-    fig,axes=plt.subplots(2,1,figsize=(9,9))
-    axes[0].bar(date,distance,width=0.5)
-    axes[1].bar(date,distance,width=0.5)
-    axes[1].set_ylim(8,18)
-    axes[0].set_title('(a) Default limit: start from 0',fontsize=10)
-    axes[1].set_title('(b) Modified limit: [8,18]',fontsize=10)
-    def labels(axes):
-        for ax in axes:
-            ax.set_xlabel('Date')
-            ax.set_ylabel('Daily Travel Distance(KM)')
-    labels(axes)
-    fig.suptitle('Comparison between Different Data Limits',fontsize=12)
-    fig.subplots_adjust(hspace=0.4)
-    plt.savefig('Daily_travel_distance.png',dpi=800)
-    plt.show()
+fig,axes=plt.subplots(2,1,figsize=(9,9))
+axes[0].bar(date,distance,width=0.5)
+axes[1].bar(date,distance,width=0.5)
+axes[1].set_ylim(8,18)
+axes[0].set_title('(a) Default limit: start from 0',fontsize=10)
+axes[1].set_title('(b) Modified limit: [8,18]',fontsize=10)
+def labels(axes):
+    for ax in axes:
+        ax.set_xlabel('Date')
+        ax.set_ylabel('Daily Travel Distance(KM)')
+labels(axes)
+fig.suptitle('Comparison between Different Data Limits',fontsize=12)
+fig.subplots_adjust(hspace=0.4)
+plt.savefig('Daily_travel_distance.png',dpi=800)
+plt.show()
 
 #Daily_Travel_Distance()
 num_days=len(date)
@@ -60,33 +59,32 @@ for t in freq.index:
     tag_time=block['tag_time'].value_counts().sort_index()
     img[tag_time.index,t.day-date[0].day]=tag_time.values
 #pDaily_Travel_Distance()
-def pDaily_Riding_Periods():
-    fig,axes=plt.subplots(figsize=(3,6))
-    axes.set_title('Daily Riding Periods')
-    axes.set_xlabel('Date')
-    axes.set_ylabel('Time Period')
-    cr=axes.imshow(img,cmap=plt.cm.gray)
-    axes.set_xticks(range(num_days))
-    axes.set_yticks(range(num_periods),range(num_periods))
-    axes.yaxis.set_major_locator(ticker.MultipleLocator(2))
-    def format_date(val,pos=None):
-        if val%2==0:
-            return date[val].strftime('%m-%d')
-        else:
-            return ''
-    axes.xaxis.set_major_formatter(ticker.FuncFormatter(format_date))
-    # Move left and bottom spines outward by 10 points
-    axes.spines['left'].set_position(('outward', 5))
-    axes.spines['bottom'].set_position(('outward', 5))
-    # Hide the right and top spines
-    axes.spines['right'].set_visible(False)
-    axes.spines['top'].set_visible(False)
-    # Only show ticks on the left and bottom spines
-    axes.yaxis.set_ticks_position('left')
-    axes.xaxis.set_ticks_position('bottom')
-    axes.grid(False)
-    fig.autofmt_xdate()
-    cbar=fig.colorbar(cr)
-    plt.savefig('Daily_Riding_Periods.png',dpi=800)
-    plt.show()
-pDaily_Riding_Periods()
+fig,axes=plt.subplots(figsize=(3,6))
+axes.set_title('Daily Riding Periods')
+axes.set_xlabel('Date')
+axes.set_ylabel('Time Period')
+cr=axes.imshow(img,cmap=plt.cm.gray)
+axes.set_xticks(range(num_days))
+axes.set_yticks(range(num_periods),range(num_periods))
+axes.yaxis.set_major_locator(ticker.MultipleLocator(2))
+def format_date(val,pos=None):
+    if val%2==0:
+        return date[val].strftime('%m-%d')
+    else:
+        return ''
+axes.xaxis.set_major_formatter(ticker.FuncFormatter(format_date))
+# Move left and bottom spines outward by 10 points
+axes.spines['left'].set_position(('outward', 5))
+axes.spines['bottom'].set_position(('outward', 5))
+# Hide the right and top spines
+axes.spines['right'].set_visible(False)
+axes.spines['top'].set_visible(False)
+# Only show ticks on the left and bottom spines
+axes.yaxis.set_ticks_position('left')
+axes.xaxis.set_ticks_position('bottom')
+axes.grid(False)
+fig.autofmt_xdate()
+cbar=fig.colorbar(cr)
+plt.savefig('Daily_Riding_Periods.png',dpi=800)
+plt.show()
+
