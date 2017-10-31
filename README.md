@@ -1,2 +1,2 @@
 # Data-Visualization-Course
-Display of Course projects
+Display of course projects
