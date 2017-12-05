@@ -189,11 +189,6 @@ fig = Figure(data=Data([edge_trace, node_trace]),
                 showlegend=False,
                 hovermode='closest',
                 margin=dict(b=20,l=5,r=5,t=40),
-                annotations=[ dict(
-                    text="Python code: <a href='https://github.com/Iamyang/Data-Visualization-Course/tree/master/Project%202%20Co-working%20information%20of%20members%20of%20the%20Central%20Committe/code.py'>code.py</a>",
-                    showarrow=False,
-                    xref="paper", yref="paper",
-                    x=0.005, y=-0.002 ) ],
                 xaxis=XAxis(showgrid=False, zeroline=False, showticklabels=False),
                 yaxis=YAxis(showgrid=False, zeroline=False, showticklabels=False)))
 
